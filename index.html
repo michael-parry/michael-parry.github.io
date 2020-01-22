@@ -1,1 +1,443 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><link rel="shortcut icon" href="./favicon.ico"/><meta name="description" content="Simple satellite programming for radio amateurs"/><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/><link rel="manifest" href="/chirpsat/manifest.json"/><title>ChirpSAT</title></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div><script>!function(l){function e(e){for(var r,t,n=e[0],o=e[1],u=e[2],i=0,a=[];i<n.length;i++)t=n[i],Object.prototype.hasOwnProperty.call(c,t)&&c[t]&&a.push(c[t][0]),c[t]=0;for(r in o)Object.prototype.hasOwnProperty.call(o,r)&&(l[r]=o[r]);for(s&&s(e);a.length;)a.shift()();return f.push.apply(f,u||[]),p()}function p(){for(var e,r=0;r<f.length;r++){for(var t=f[r],n=!0,o=1;o<t.length;o++){var u=t[o];0!==c[u]&&(n=!1)}n&&(f.splice(r--,1),e=i(i.s=t[0]))}return e}var t={},c={1:0},f=[];function i(e){if(t[e])return t[e].exports;var r=t[e]={i:e,l:!1,exports:{}};return l[e].call(r.exports,r,r.exports,i),r.l=!0,r.exports}i.m=l,i.c=t,i.d=function(e,r,t){i.o(e,r)||Object.defineProperty(e,r,{enumerable:!0,get:t})},i.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},i.t=function(r,e){if(1&e&&(r=i(r)),8&e)return r;if(4&e&&"object"==typeof r&&r&&r.__esModule)return r;var t=Object.create(null);if(i.r(t),Object.defineProperty(t,"default",{enumerable:!0,value:r}),2&e&&"string"!=typeof r)for(var n in r)i.d(t,n,function(e){return r[e]}.bind(null,n));return t},i.n=function(e){var r=e&&e.__esModule?function(){return e.default}:function(){return e};return i.d(r,"a",r),r},i.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},i.p="/chirpsat/";var r=this.webpackJsonpchirpsat=this.webpackJsonpchirpsat||[],n=r.push.bind(r);r.push=e,r=r.slice();for(var o=0;o<r.length;o++)e(r[o]);var s=n;p()}([])</script><script src="/chirpsat/static/js/2.8709b7fa.chunk.js"></script><script src="/chirpsat/static/js/main.7b72cb6b.chunk.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <title>ChirpSAT</title>
+  </head>
+  <body>
+    <nav class="nav navbar navbar-expand navbar-dark bg-primary fixed-top">
+      <a href="/index.html" class="navbar-brand">ChirpSAT</a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="/about.html" class="nav-link">About</a>
+        </li>
+        <li class="nav-item"><a href="#0" class="nav-link">Contact</a></li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="navbar-item">
+          <a
+            href="https://www.twitter.com/ke8kdf/"
+            target="_blank"
+            class="nav-link"
+            ><i class="fab fa-twitter"></i
+          ></a>
+        </li>
+        <li class="navbar-item">
+          <a
+            href="https://github.com/michael-parry"
+            target="_blank"
+            class="nav-link"
+            ><i><i class="fab fa-github"></i></i
+          ></a>
+        </li>
+      </ul>
+      <script
+        src="https://kit.fontawesome.com/5eb41dcbf5.js"
+        crossorigin="anonymous"
+      ></script>
+    </nav>
+
+    <div class="row m-0 position-relative">
+      <div
+        class="config col col-lg-2 col-sm-5 form-group m-0 p-0"
+        style="position: fixed; top: 56px; left: 0; bottom: 0; overflow-y: auto"
+      >
+        <div class="container mt-2">
+          <div class="form-group">
+            <label for="radio-select">Radio</label>
+            <select id="radio-select" class="form-control">
+              <option value="choose" class="form-control">Choose..</option>
+              <option value="0" class="form-control"
+                >AnyTone 878</option
+              >
+              <option value="1" class="form-control"
+                >Retevis RT82</option
+              >
+            </select>
+          </div>
+          <div class="form-group">
+            <div class="list-group" id="satListGroup">
+              <input
+                type="search"
+                name="sat-search"
+                class="list-group-item"
+                placeholder="Search.."
+              />
+              <a
+                href="#0"
+                class="list-group-item list-group-item-action bg-light"
+                >AO-92</a
+              >
+              <a
+                href="#0"
+                class="list-group-item list-group-item-action bg-light"
+                >AO-91</a
+              >
+              <a
+                href="#0"
+                class="list-group-item list-group-item-action bg-light"
+                >SO-50</a
+              >
+              <a
+                href="#0"
+                class="list-group-item list-group-item-action bg-light"
+                >PO-101</a
+              >
+              <a
+                href="#0"
+                class="list-group-item list-group-item-action bg-light"
+                >CAS-3H</a
+              >
+              <a
+                href="#0"
+                class="list-group-item list-group-item-action bg-light disabled"
+                >AO-95</a
+              >
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="options-channel-start">Channel</label>
+            <div class="form-row">
+              <div class="input-group col-12">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="options-channel-start"
+                  placeholder="start"
+                />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="options-channel-range"
+                  placeholder="range"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="option-tone">Tone</label>
+            <div class="input-group">
+              <select
+                name="tone"
+                class="form-control"
+                id="option-tone"
+                aria-label="Tone"
+                aria-describedby="tone-addon"
+              >
+                <option value="choose" selected>Choose..</option>
+                <option value="67.0">67.0</option>
+                <option value="71.9">71.9</option>
+                <option value="74.4">74.4</option>
+                <option value="77.0">77.0</option>
+                <option value="79.7">79.7</option>
+                <option value="82.5">82.5</option>
+                <option value="85.4">85.4</option>
+                <option value="88.5">88.5</option>
+                <option value="91.5">91.5</option>
+                <option value="94.8">94.8</option>
+                <option value="97.4">97.4</option>
+                <option value="100.0">100.0</option>
+                <option value="103.5">103.5</option>
+                <option value="107.2">107.2</option>
+                <option value="110.9">110.9</option>
+                <option value="114.8">114.8</option>
+                <option value="118.8">118.8</option>
+                <option value="123.0">123.0</option>
+                <option value="127.3">127.3</option>
+                <option value="131.8">131.8</option>
+                <option value="136.5">136.5</option>
+                <option value="141.3">141.3</option>
+                <option value="146.2">146.2</option>
+                <option value="151.4">151.4</option>
+                <option value="156.7">156.7</option>
+                <option value="162.2">162.2</option>
+                <option value="167.9">167.9</option>
+                <option value="173.8">173.8</option>
+                <option value="179.9">179.9</option>
+                <option value="186.2">186.2</option>
+                <option value="192.8">192.8</option>
+                <option value="203.5">203.5</option>
+                <option value="210.7">210.7</option>
+                <option value="218.1">218.1</option>
+                <option value="225.7">225.7</option>
+                <option value="233.6">233.6</option>
+                <option value="241.8">241.8</option>
+                <option value="250.3">250.3</option>
+              </select>
+              <div class="input-group-append">
+                <label class="input-group-text" for="option-tone">Hz</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="option-power">Power</label>
+            <div class="input-group">
+              <select name="power-select" id="power-select" class="form-control">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+                <option value="turbo">Turbo</option>
+              </select>
+              <div class="input-group-append">
+                <span class="input-group-text">Watts</span>
+              </div>
+            </div>
+          </div>
+          <input
+            type="text"
+            name="channelName"
+            class="form-control"
+            placeholder="AO-92"
+          />
+          <button
+            class="btn btn-primary btn-large btn-block my-2"
+            id="sheetUpdate"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+
+      <table
+        class="col col-7 col-lg-10 table table-responsive-lg table-striped table-bordered p-0 ml-auto overflow-auto"
+        id="freqTable"
+        style="margin-top: 56px;"
+      >
+        <thead class="thead-dark">
+          <th>Channel</th>
+          <th>Channel Name</th>
+          <th>TX</th>
+          <th>RX</th>
+          <th>Tone</th>
+          <th>Power</th>
+        </thead>
+        <tr>
+          <td class="channelNum"></td>
+          <td class="channelName"></td>
+          <td class="uplink"></td>
+          <td class="downlink"></td>
+          <td class="tone"></td>
+          <td class="power"></td>
+        </tr>
+        <tr>
+          <td class="channelNum"></td>
+          <td class="channelName"></td>
+          <td class="uplink"></td>
+          <td class="downlink"></td>
+          <td class="tone"></td>
+          <td class="power"></td>
+        </tr>
+        <tr>
+          <td class="channelNum"></td>
+          <td class="channelName"></td>
+          <td class="uplink"></td>
+          <td class="downlink"></td>
+          <td class="tone"></td>
+          <td class="power"></td>
+        </tr>
+        <tr>
+          <td class="channelNum"></td>
+          <td class="channelName"></td>
+          <td class="uplink"></td>
+          <td class="downlink"></td>
+          <td class="tone"></td>
+          <td class="power"></td>
+        </tr>
+        <tr>
+          <td class="channelNum"></td>
+          <td class="channelName"></td>
+          <td class="uplink"></td>
+          <td class="downlink"></td>
+          <td class="tone"></td>
+          <td class="power"></td>
+        </tr>
+        <tr>
+          <td class="channelNum"></td>
+          <td class="channelName"></td>
+          <td class="uplink"></td>
+          <td class="downlink"></td>
+          <td class="tone"></td>
+          <td class="power"></td>
+        </tr>
+        <tr>
+          <td class="channelNum"></td>
+          <td class="channelName"></td>
+          <td class="uplink"></td>
+          <td class="downlink"></td>
+          <td class="tone"></td>
+          <td class="power"></td>
+        </tr>
+        <tr>
+          <td class="channelNum"></td>
+          <td class="channelName"></td>
+          <td class="uplink"></td>
+          <td class="downlink"></td>
+          <td class="tone"></td>
+          <td class="power"></td>
+        </tr>
+        <tr>
+          <td class="channelNum"></td>
+          <td class="channelName"></td>
+          <td class="uplink"></td>
+          <td class="downlink"></td>
+          <td class="tone"></td>
+          <td class="power"></td>
+        </tr>
+        <tr>
+          <td class="channelNum"></td>
+          <td class="channelName"></td>
+          <td class="uplink"></td>
+          <td class="downlink"></td>
+          <td class="tone"></td>
+          <td class="power"></td>
+        </tr>
+        <tr>
+          <td class="channelNum"></td>
+          <td class="channelName"></td>
+          <td class="uplink"></td>
+          <td class="downlink"></td>
+          <td class="tone"></td>
+          <td class="power"></td>
+        </tr>
+        <tr>
+          <td class="channelNum"></td>
+          <td class="channelName"></td>
+          <td class="uplink"></td>
+          <td class="downlink"></td>
+          <td class="tone"></td>
+          <td class="power"></td>
+        </tr>
+        <tr>
+          <td class="channelNum"></td>
+          <td class="channelName"></td>
+          <td class="uplink"></td>
+          <td class="downlink"></td>
+          <td class="tone"></td>
+          <td class="power"></td>
+        </tr>
+        <tr>
+          <td class="channelNum"></td>
+          <td class="channelName"></td>
+          <td class="uplink"></td>
+          <td class="downlink"></td>
+          <td class="tone"></td>
+          <td class="power"></td>
+        </tr>
+        <tr>
+          <td class="channelNum"></td>
+          <td class="channelName"></td>
+          <td class="uplink"></td>
+          <td class="downlink"></td>
+          <td class="tone"></td>
+          <td class="power"></td>
+        </tr>
+        <tr>
+          <td class="channelNum"></td>
+          <td class="channelName"></td>
+          <td class="uplink"></td>
+          <td class="downlink"></td>
+          <td class="tone"></td>
+          <td class="power"></td>
+        </tr>
+        <tr>
+          <td class="channelNum"></td>
+          <td class="channelName"></td>
+          <td class="uplink"></td>
+          <td class="downlink"></td>
+          <td class="tone"></td>
+          <td class="power"></td>
+        </tr>
+        <tr>
+          <td class="channelNum"></td>
+          <td class="channelName"></td>
+          <td class="uplink"></td>
+          <td class="downlink"></td>
+          <td class="tone"></td>
+          <td class="power"></td>
+        </tr>
+        <tr>
+          <td class="channelNum"></td>
+          <td class="channelName"></td>
+          <td class="uplink"></td>
+          <td class="downlink"></td>
+          <td class="tone"></td>
+          <td class="power"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+    <script src="/js/app.js"></script>
+  </body>
+</html>
